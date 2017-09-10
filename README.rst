@@ -1,0 +1,21 @@
+=================
+React Frame Table
+=================
+
+Proof of concept for rendering tables with huge amount of rows.
+
+Setup development environment
+=============================
+
+#. Install `node` and `gulp`
+
+#. Run in project directory
+
+    .. code-block:: bash
+
+        npm i
+        gulp sass
+        npm start
+
+
+#. Open http://127.0.0.1:3030/ in browser
