@@ -17,7 +17,13 @@ class FrameTable extends React.Component {
         }
         return (
             <div className="table">
-                {rows}
+                {React.createElement(this.props.headerComponent, {
+                    columnComponent: this.props.columnComponent,
+                    columns: this.props.columns,
+                })}
+                {React.createElement(this.props.bodyComponent, {
+                    onWheel: this.props.onWheel,
+                }, rows)}
             </div>
         );
     }

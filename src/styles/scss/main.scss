@@ -1,7 +1,22 @@
-$border: #787878 1px solid;
 
 .table {
+  $border: #787878 1px solid;
   display: inline-block;
+  .header {
+    border-top: $border;
+    &:last-child {
+      border-bottom: $border;
+    }
+    .column {
+      display: inline-block;
+      box-sizing: border-box;
+      padding: 4px;
+      border-left: $border;
+      &:last-child {
+        border-right: $border;
+      }
+    }
+  }
   .row {
     border-top: $border;
     &:last-child {
@@ -9,6 +24,7 @@ $border: #787878 1px solid;
     }
     .cell {
       display: inline-block;
+      box-sizing: border-box;
       padding: 4px;
       border-left: $border;
       &:last-child {
