@@ -9,7 +9,7 @@ class FrameTable extends React.Component {
 
     render() {
         const {
-            tableComponent, headerComponent, children, sort, onSortChange, bodyComponent, rowComponent,
+            tableComponent, headerComponent, children, sort, onSortChange, externalSort, bodyComponent, rowComponent,
             cellComponent, onWheel, frameSize, scrollIndex, data, renderSquash
         } = this.props;
         let columnIds = [];
@@ -41,6 +41,7 @@ class FrameTable extends React.Component {
                       data={data}
                       renderSquash={renderSquash}
                       sort={sort}
+                      externalSort={externalSort}
                 />
             </Table>
         );

@@ -49,7 +49,8 @@ class Body extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (
-            !isEqual(nextProps.sort, this.props.sort) ||
+            nextProps.externalSort !== this.props.externalSort ||
+            !nextProps.externalSort && !isEqual(nextProps.sort, this.props.sort) ||
             !isEqual(nextProps.data, this.props.data)
         ) {
             this.setState({
