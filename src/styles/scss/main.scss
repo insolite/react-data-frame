@@ -2,6 +2,7 @@
 .table {
   $border: #787878 1px solid;
   display: inline-block;
+  user-select: none;
   .header {
     border-top: $border;
     &:last-child {
@@ -12,6 +13,7 @@
       box-sizing: border-box;
       padding: 4px;
       border-left: $border;
+      cursor: pointer;
       &:last-child {
         border-right: $border;
       }

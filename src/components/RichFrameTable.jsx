@@ -56,6 +56,8 @@ class RichFrameTable extends React.Component {
                             cellComponent={this.props.cellComponent}
                             onWheel={this.onWheel}
                             renderSquash={this.props.renderSquash}
+                            sort={this.props.sort}
+                            onSortChange={this.props.onSortChange}
                 >
                     {this.props.children}
                 </FrameTable>
