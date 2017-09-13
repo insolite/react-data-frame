@@ -11,6 +11,7 @@ class App extends React.Component {
         super(props);
 
         this.onSortChange = this.onSortChange.bind(this);
+        this.onFiltersChange = this.onFiltersChange.bind(this);
 
         let data = [];
         let rowsCount = 1000;
@@ -26,6 +27,7 @@ class App extends React.Component {
         this.state = {
             data: data,
             sort: null,
+            filters: {},
         };
     }
 
@@ -35,12 +37,20 @@ class App extends React.Component {
         });
     }
 
+    onFiltersChange(filters) {
+        this.setState({
+            filters,
+        });
+    }
+
     render() {
         return (
             <RichFrameTable data={this.state.data}
                             frameSize={10}
                             sort={this.state.sort}
                             onSortChange={this.onSortChange}
+                            filters={this.state.filters}
+                            onFiltersChange={this.onFiltersChange}
             >
                 <Column dataField="id"
                         width={100}
@@ -53,6 +63,14 @@ class App extends React.Component {
                 <Column id="num0"
                         dataField="num"
                         width={60}
+                        filterComponent={props => (
+                            <input value={props.value}
+                                   onChange={e => props.onChange(e.target.value === '' ? undefined : parseInt(e.target.value))}
+                                   type="number"
+                                   style={{width: '100%'}}
+                            />
+                        )}
+                        filter={(filterValue, value, row) => value >= filterValue}
                 />
                 <Column id="num1"
                         dataField="num"

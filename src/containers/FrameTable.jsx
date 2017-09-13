@@ -9,11 +9,12 @@ class FrameTable extends React.Component {
 
     render() {
         const {
-            tableComponent, headerComponent, children, sort, onSortChange, externalSort, bodyComponent, rowComponent,
-            cellComponent, onWheel, frameSize, scrollIndex, data, renderSquash
+            tableComponent, headerComponent, children, bodyComponent, rowComponent,
+            sort, onSortChange, externalSort, filters, onFiltersChange, externalFilters,
+            cellComponent, onWheel, frameSize, scrollIndex, data, renderSquash, onVisibleDataChange
         } = this.props;
         let columnIds = [];
-        const columnComponents = children.reduce((columns, column, index) => {
+        const columnComponents = children.reduce((columns, column) => {
             let id = column.props.id || column.props.dataField;
             if (columnIds.includes(id)) {
                 throw 'Column must have unique "dataField" or "id" prop';
@@ -30,6 +31,8 @@ class FrameTable extends React.Component {
                         columns={columnComponents}
                         sort={sort}
                         onSortChange={onSortChange}
+                        filters={filters}
+                        onFiltersChange={onFiltersChange}
                 />
                 <Body bodyComponent={bodyComponent}
                       rowComponent={rowComponent}
@@ -42,6 +45,9 @@ class FrameTable extends React.Component {
                       renderSquash={renderSquash}
                       sort={sort}
                       externalSort={externalSort}
+                      filters={filters}
+                      externalFilters={externalFilters}
+                      onVisibleDataChange={onVisibleDataChange}
                 />
             </Table>
         );

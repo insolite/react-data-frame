@@ -19,16 +19,24 @@ class RichFrameTable extends React.Component {
 
         this.onScrollFrame = this.onScrollFrame.bind(this);
         this.onWheel = this.onWheel.bind(this);
+        this.onVisibleDataChange = this.onVisibleDataChange.bind(this);
 
         this.state = {
             scrollIndex: 0,
+            visibleData: props.data,
         };
     }
 
+    onVisibleDataChange(visibleData) {
+        this.setState({
+            visibleData,
+        });
+    }
+
     onScrollFrame(values) {
-        let newIndex = parseInt(values.top * this.props.data.length);
-        if (newIndex >= (this.props.data.length - this.props.frameSize)) {
-            newIndex = this.props.data.length - this.props.frameSize;
+        let newIndex = parseInt(values.top * this.state.visibleData.length);
+        if (newIndex >= (this.state.visibleData.length - this.props.frameSize)) {
+            newIndex = this.state.visibleData.length - this.props.frameSize;
         }
         if (newIndex != this.state.scrollIndex) {
             this.setState({
@@ -59,6 +67,10 @@ class RichFrameTable extends React.Component {
                             sort={this.props.sort}
                             onSortChange={this.props.onSortChange}
                             externalSort={this.props.externalSort}
+                            filters={this.props.filters}
+                            onFiltersChange={this.props.onFiltersChange}
+                            externalFilters={this.props.externalFilters}
+                            onVisibleDataChange={this.onVisibleDataChange}
                 >
                     {this.props.children}
                 </FrameTable>
@@ -67,7 +79,7 @@ class RichFrameTable extends React.Component {
                             onScrollFrame={this.onScrollFrame}
                             ref="scrollbars"
                 >
-                    <div style={{height: Math.min(this.props.data.length * (height / this.props.frameSize), FAKE_SCROLL_CONTAINER_HEIGHT)}}>&nbsp;</div>
+                    <div style={{height: Math.min(this.state.visibleData.length * (height / this.props.frameSize), FAKE_SCROLL_CONTAINER_HEIGHT)}}>&nbsp;</div>
                 </Scrollbars>
             </div>
         );

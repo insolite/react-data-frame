@@ -14,19 +14,47 @@ const defaultSortComparator = (value1, value2) => {
     return 0;
 };
 
+const defaultFilter = (filterValue, value) => {
+    return filterValue == value;
+};
+
 class Body extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.update = this.update.bind(this);
+        this.filterData = this.filterData.bind(this);
+        this.sortData = this.sortData.bind(this);
+        this.getData = this.getData.bind(this);
 
         this.state = {
-            data: this.sortData(props.data, props.columns, props.sort),
+            data: this.getData(props.data, props.columns, props.filters, props.sort),
         };
 
         this.renderTime = null;
         this.timeout = null;
+    }
+
+    getData(data, columns, filters, sort) {
+        return this.sortData(this.filterData(data, columns, filters), columns, sort);
+    }
+
+    filterData(data, columns, filters) {
+        let newData = data;
+        Object.keys(filters).map(filterKey => {
+            const filterValue = filters[filterKey];
+            const column = columns.find(column => column.props.id === filterKey);
+            newData = newData.filter((row) => (
+                (column.props.filter || defaultFilter)(
+                    filterValue,
+                    row[column.props.dataField],
+                    row,
+                    defaultFilter
+                )
+            ));
+        });
+        return newData;
     }
 
     sortData(data, columns, sort) {
@@ -51,11 +79,14 @@ class Body extends React.Component {
         if (
             nextProps.externalSort !== this.props.externalSort ||
             !nextProps.externalSort && !isEqual(nextProps.sort, this.props.sort) ||
+            nextProps.externalFilters !== this.props.externalFilters ||
+            !nextProps.externalFilters && !isEqual(nextProps.filters, this.props.filters) ||
             !isEqual(nextProps.data, this.props.data)
         ) {
+            // TODO: optimize: call only sort when possible
             this.setState({
-                data: this.sortData(nextProps.data, nextProps.columns, nextProps.sort),
-            });
+                data: this.getData(nextProps.data, nextProps.columns, nextProps.filters, nextProps.sort),
+            }, () => this.props.onVisibleDataChange && this.props.onVisibleDataChange(this.state.data));
         }
     }
 

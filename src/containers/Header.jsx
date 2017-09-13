@@ -23,7 +23,7 @@ const getNextSort = (sort, id, dataField) => {
 class Header extends React.Component {
 
     render() {
-        const { headerComponent, columns, sort, onSortChange } = this.props;
+        const { headerComponent, columns, sort, onSortChange, filters, onFiltersChange } = this.props;
         return (
             React.createElement(headerComponent, {}, columns.map((column, index) => (
                 <Column {...column.props}
@@ -32,6 +32,8 @@ class Header extends React.Component {
                         sort={sort}
                         onSortChange={onSortChange}
                         onSortSwitch={() => onSortChange(getNextSort(sort, column.props.id, column.props.dataField))}
+                        filters={filters}
+                        onFiltersChange={onFiltersChange}
                 />
             )))
         );

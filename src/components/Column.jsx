@@ -9,17 +9,33 @@ const SORT_ICONS = {
     [SORT_NONE]: '',
 };
 
+class DefaultFilter extends React.Component {
+    render() {
+        const { value, onChange } = this.props;
+        return (
+            <input type="text" value={value || ''} onChange={e => onChange(e.target.value || undefined)} style={{width: '100%'}}/>
+        );
+    }
+}
+
 class Column extends React.Component {
 
     render() {
-        const { width, children, sortDirection, onSortChange, onSortSwitch, dataField, id } = this.props;
+        const { width, children, sortDirection, onSortChange, onSortSwitch, filter, onFilterChange, filterComponent, dataField, id } = this.props;
         return (
             <div className="column"
                  style={{width: width || 'auto'}}
-                 onClick={() => onSortSwitch()}
             >
-                {SORT_ICONS[sortDirection]}
-                {children}
+                <div onClick={() => onSortSwitch()}>
+                    {SORT_ICONS[sortDirection]}
+                    {children}
+                </div>
+                <div>
+                    {React.createElement(filterComponent || DefaultFilter, {
+                        value: filter,
+                        onChange: onFilterChange,
+                    })}
+                </div>
             </div>
         );
     }
