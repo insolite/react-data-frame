@@ -24,69 +24,12 @@ class App extends React.Component {
         this.state = {
             data: data,
         };
-
-        this.columns = [
-            {
-                key: 'id',
-                width: 100,
-                cellFormatter: props => <div style={{color: 'green'}}>{props.value}</div>,
-            },
-            {
-                key: 'name',
-                width: 300,
-            },
-            {
-                key: 'num',
-                width: 50,
-            },
-            {
-                key: 'num',
-                width: 50,
-            },
-            {
-                key: 'num',
-                width: 50,
-            },
-            {
-                key: 'num',
-                width: 50,
-            },
-            {
-                key: 'num',
-                width: 50,
-            },
-            {
-                key: 'num',
-                width: 50,
-            },
-            {
-                key: 'num',
-                width: 50,
-            },
-            {
-                key: 'num',
-                width: 50,
-            },
-            {
-                key: 'num',
-                width: 50,
-            },
-            {
-                key: 'num',
-                width: 50,
-            },
-            {
-                key: 'num',
-                width: 50,
-            },
-        ];
     }
 
     render() {
         return (
             <RichFrameTable data={this.state.data}
                             frameSize={10}
-                            columns={this.columns}
             >
                 <Column dataField="id"
                         width={100}

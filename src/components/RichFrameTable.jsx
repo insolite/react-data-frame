@@ -55,6 +55,7 @@ class RichFrameTable extends React.Component {
                             rowComponent={this.props.rowComponent}
                             cellComponent={this.props.cellComponent}
                             onWheel={this.onWheel}
+                            renderSquash={this.props.renderSquash}
                 >
                     {this.props.children}
                 </FrameTable>

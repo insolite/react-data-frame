@@ -21,6 +21,7 @@ class FrameTable extends React.Component {
                       frameSize={this.props.frameSize}
                       scrollIndex={this.props.scrollIndex}
                       data={this.props.data}
+                      renderSquash={this.props.renderSquash}
                 />
             </Table>
         );

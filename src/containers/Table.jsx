@@ -5,9 +5,7 @@ class Table extends React.Component {
 
     render() {
         return (
-            <div className="table">
-                {this.props.children}
-            </div>
+            React.createElement(this.props.tableComponent, {}, this.props.children)
         );
     }
 }

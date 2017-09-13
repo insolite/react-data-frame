@@ -1,7 +1,7 @@
 const
     NODE_ENV = process.env.NODE_ENV || 'development',
-    LISTEN_HOST = 'localhost',
-    LISTEN_PORT = 3030;
+    LISTEN_HOST = process.env.LISTEN_HOST || 'localhost',
+    LISTEN_PORT = process.env.LISTEN_PORT || 3030;
 
 var config = {
    entry: './src',
