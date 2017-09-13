@@ -1,7 +1,8 @@
 import React from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 
-import RichFrameTable from './RichFrameTable';
+import RichFrameTable from './components/RichFrameTable';
+import Column from './components/Column';
 
 
 class App extends React.Component {
@@ -86,7 +87,45 @@ class App extends React.Component {
             <RichFrameTable data={this.state.data}
                             frameSize={10}
                             columns={this.columns}
-            />
+            >
+                <Column dataField="id"
+                        width={100}
+                        cellFormatter={props => <div style={{color: 'green'}}>{props.value}</div>}
+                />
+                <Column dataField="name"
+                        width={300}
+                />
+                <Column dataField="num"
+                        width={50}
+                />
+                <Column dataField="num"
+                        width={50}
+                />
+                <Column dataField="num"
+                        width={50}
+                />
+                <Column dataField="num"
+                        width={50}
+                />
+                <Column dataField="num"
+                        width={50}
+                />
+                <Column dataField="num"
+                        width={50}
+                />
+                <Column dataField="num"
+                        width={50}
+                />
+                <Column dataField="num"
+                        width={50}
+                />
+                <Column dataField="num"
+                        width={50}
+                />
+                <Column dataField="num"
+                        width={50}
+                />
+            </RichFrameTable>
         );
     }
 }

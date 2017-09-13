@@ -1,11 +1,11 @@
 import React from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 
-import FrameTable from './FrameTable';
+import FrameTable from '../containers/FrameTable';
 import Row from './Row';
 import Cell from './Cell';
 import Header from './Header';
-import Column from './Column';
+import Table from './Table';
 import Body from './Body';
 
 
@@ -49,14 +49,15 @@ class RichFrameTable extends React.Component {
                 <FrameTable data={this.props.data}
                             frameSize={this.props.frameSize}
                             scrollIndex={this.state.scrollIndex}
-                            rowComponent={Row}
-                            cellComponent={Cell}
-                            headerComponent={Header}
-                            columnComponent={Column}
-                            bodyComponent={Body}
-                            columns={this.props.columns}
+                            tableComponent={this.props.tableComponent}
+                            headerComponent={this.props.headerComponent}
+                            bodyComponent={this.props.bodyComponent}
+                            rowComponent={this.props.rowComponent}
+                            cellComponent={this.props.cellComponent}
                             onWheel={this.onWheel}
-                />
+                >
+                    {this.props.children}
+                </FrameTable>
                 <Scrollbars style={{ width: 10, height: height }}
                             className="scrollbars"
                             onScrollFrame={this.onScrollFrame}
@@ -68,5 +69,13 @@ class RichFrameTable extends React.Component {
         );
     }
 }
+
+RichFrameTable.defaultProps = {
+    tableComponent: Table,
+    headerComponent: Header,
+    bodyComponent: Body,
+    rowComponent: Row,
+    cellComponent: Cell,
+};
 
 export default RichFrameTable;

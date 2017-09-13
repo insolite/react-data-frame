@@ -1,15 +1,15 @@
 import React from 'react';
 
 
-class Row extends React.Component {
+class Table extends React.Component {
 
     render() {
         return (
-            <div className="header">
+            <div className="table">
                 {this.props.children}
             </div>
         );
     }
 }
 
-export default Row;
+export default Table;
