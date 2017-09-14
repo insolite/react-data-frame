@@ -1,7 +1,7 @@
 import React from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 
-import RichFrameTable from './components/RichFrameTable';
+import RichFrameTable from './components/RichTable';
 import Column from './components/Column';
 
 

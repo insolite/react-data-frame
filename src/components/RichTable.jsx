@@ -1,7 +1,7 @@
 import React from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 
-import FrameTable from '../containers/FrameTable';
+import FrameTable from '../containers/Table';
 import Row from './Row';
 import Cell from './Cell';
 import Header from './Header';
@@ -12,7 +12,7 @@ import Body from './Body';
 const FAKE_SCROLL_CONTAINER_HEIGHT = 10000;
 
 
-class RichFrameTable extends React.Component {
+class RichTable extends React.Component {
 
     constructor(props) {
         super(props);
@@ -112,7 +112,7 @@ class RichFrameTable extends React.Component {
     }
 }
 
-RichFrameTable.defaultProps = {
+RichTable.defaultProps = {
     tableComponent: Table,
     headerComponent: Header,
     bodyComponent: Body,
@@ -120,4 +120,4 @@ RichFrameTable.defaultProps = {
     cellComponent: Cell,
 };
 
-export default RichFrameTable;
+export default RichTable;
