@@ -1,7 +1,7 @@
 import React from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 
-import { Column, RichFrameTable } from '../../src';
+import { Column, RichFrameTable } from 'react-frame-table';
 
 
 class App extends React.Component {

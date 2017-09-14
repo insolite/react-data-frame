@@ -50,6 +50,9 @@ module.exports = {
             '.web.js',
             '.jsx',
             '.js'
-        ]
+        ],
+        alias: {
+            'react-frame-table': path.resolve(__dirname, 'src')
+        }
     }
 };
