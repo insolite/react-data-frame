@@ -116,6 +116,11 @@ class Body extends React.Component {
         } = this.props;
         const { data } = this.state;
 
+        let safeScrollIndex = Math.max(
+            0,
+            Math.min(data.length - 1, scrollIndex)
+        );
+
         if (renderSquash) {
             this.renderTime = new Date();
         }
@@ -125,7 +130,7 @@ class Body extends React.Component {
             rows.push(
                 <Row rowComponent={rowComponent}
                      key={i}
-                     data={data[scrollIndex + i]}
+                     data={data[safeScrollIndex + i]}
                      cellComponent={cellComponent}
                      columns={columns}
                      onClick={onRowClick}
