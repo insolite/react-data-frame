@@ -7,6 +7,7 @@ import Cell from './Cell';
 import Header from './Header';
 import Table from './Table';
 import Body from './Body';
+import Column from './Column';
 
 
 const FAKE_SCROLL_CONTAINER_HEIGHT = 10000;
@@ -118,6 +119,11 @@ RichTable.defaultProps = {
     bodyComponent: Body,
     rowComponent: Row,
     cellComponent: Cell,
+    columnComponent: Column,
+    data: [],
+    filters: {},
+    sort: null,
+    selectedRows: [],
 };
 
 export default RichTable;

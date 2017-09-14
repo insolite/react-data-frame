@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SORT_NONE, SORT_ASC, SORT_DSC } from '../containers/constants';
+import { SORT_NONE, SORT_ASC, SORT_DSC } from '../constants';
 
 
 const SORT_ICONS = {

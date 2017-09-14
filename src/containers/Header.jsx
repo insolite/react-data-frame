@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Column from './Column';
-import { SORT_NONE, SORT_ASC, SORT_DSC } from './constants';
+import { SORT_NONE, SORT_ASC, SORT_DSC } from '../constants';
 
 
 const SORT_DIRECTIONS = [

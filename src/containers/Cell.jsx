@@ -4,12 +4,13 @@ import React from 'react';
 class Cell extends React.Component {
 
     render() {
-        const { cellComponent, column: { props: { cellFormatter, width } }, value, row } = this.props;
+        const { cellComponent, column: { props: { cellFormatter, cellValue, width } }, value, row, rowIndex } = this.props;
         return (
             React.createElement(cellComponent, {width}, cellFormatter ? (
                 React.createElement(cellFormatter, {
-                    value,
+                    value: cellValue ? cellValue(value, row, rowIndex) : value,
                     row,
+                    rowIndex,
                 })
             ) : (
                 value

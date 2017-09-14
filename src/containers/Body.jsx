@@ -2,7 +2,7 @@ import React from 'react';
 import { isEqual } from 'lodash';
 
 import Row from './Row';
-import { SORT_NONE, SORT_ASC } from './constants';
+import { SORT_NONE, SORT_ASC } from '../constants';
 
 
 const defaultSortComparator = (value1, value2) => {
@@ -37,7 +37,8 @@ class Body extends React.Component {
     }
 
     getData(data, columns, filters, sort) {
-        return this.sortData(this.filterData(data, columns, filters), columns, sort);
+        let res = this.sortData(this.filterData(data, columns, filters), columns, sort);
+        return res;
     }
 
     filterData(data, columns, filters) {
@@ -127,10 +128,12 @@ class Body extends React.Component {
 
         let rows = [];
         for (let i = 0; i < Math.min(frameSize, data.length); i++) {
+            let index = safeScrollIndex + i;
             rows.push(
                 <Row rowComponent={rowComponent}
-                     key={i}
-                     data={data[safeScrollIndex + i]}
+                     key={index}
+                     index={index}
+                     data={data[index]}
                      cellComponent={cellComponent}
                      columns={columns}
                      onClick={onRowClick}
