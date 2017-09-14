@@ -62,6 +62,7 @@ class RichFrameTable extends React.Component {
                             bodyComponent={this.props.bodyComponent}
                             rowComponent={this.props.rowComponent}
                             cellComponent={this.props.cellComponent}
+                            columnComponent={this.props.columnComponent}
                             onWheel={this.onWheel}
                             renderSquash={this.props.renderSquash}
                             sort={this.props.sort}
@@ -71,8 +72,33 @@ class RichFrameTable extends React.Component {
                             onFiltersChange={this.props.onFiltersChange}
                             externalFilters={this.props.externalFilters}
                             onVisibleDataChange={this.onVisibleDataChange}
+                            onRowClick={this.props.onRowClick}
                 >
-                    {this.props.children}
+                    {[React.createElement(this.props.columnComponent, {
+                        id: '_selected',
+                        label: props => <input type="checkbox" disabled/>,
+                        filterComponent: () => <div>&nbsp;</div>,
+                        filter: () => true, // TODO: filterable flag
+                        cellFormatter: props => {
+                            const value = this.props.selectedRows.indexOf(props.row.id);
+                            const checked = value >= 0;
+                            return (
+                                <input type="checkbox" checked={checked} onChange={() => {
+                                    let newSelectedRows = this.props.selectedRows.slice();
+                                    if (checked) {
+                                        newSelectedRows.splice(value, 1);
+                                    } else {
+                                        newSelectedRows.push(props.row.id);
+                                    }
+                                    this.props.onSelectedRowsChange(newSelectedRows);
+                                }}/>
+                            );
+                        }
+                    }), ...this.props.children].map((component, index) => (
+                        React.cloneElement(component, {
+                            key: index,
+                        })
+                    ))}
                 </FrameTable>
                 <Scrollbars style={{ width: 10, height: height }}
                             className="scrollbars"

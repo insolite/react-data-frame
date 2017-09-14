@@ -6,9 +6,9 @@ import Cell from './Cell';
 class Row extends React.Component {
 
     render() {
-        const { rowComponent, cellComponent, data, columns } = this.props;
+        const { rowComponent, cellComponent, data, columns, onClick } = this.props;
         return (
-            React.createElement(rowComponent, {}, columns.map((column, index) => (
+            React.createElement(rowComponent, {onClick: () => onClick(data)}, columns.map((column, index) => (
                 <Cell cellComponent={cellComponent}
                       key={index}
                       value={data[column.props.dataField]}

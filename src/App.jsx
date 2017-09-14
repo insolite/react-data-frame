@@ -12,6 +12,7 @@ class App extends React.Component {
 
         this.onSortChange = this.onSortChange.bind(this);
         this.onFiltersChange = this.onFiltersChange.bind(this);
+        this.onSelectedRowsChange = this.onSelectedRowsChange.bind(this);
 
         let data = [];
         let rowsCount = 1000;
@@ -28,6 +29,7 @@ class App extends React.Component {
             data: data,
             sort: null,
             filters: {},
+            selectedRows: [],
         };
     }
 
@@ -43,6 +45,12 @@ class App extends React.Component {
         });
     }
 
+    onSelectedRowsChange(selectedRows) {
+        this.setState({
+            selectedRows,
+        });
+    }
+
     render() {
         return (
             <RichFrameTable data={this.state.data}
@@ -51,6 +59,10 @@ class App extends React.Component {
                             onSortChange={this.onSortChange}
                             filters={this.state.filters}
                             onFiltersChange={this.onFiltersChange}
+                            columnComponent={Column}
+                            selectedRows={this.state.selectedRows}
+                            onSelectedRowsChange={this.onSelectedRowsChange}
+                            onRowClick={row => this.setState({selectedRows: [row.id]})}
             >
                 <Column dataField="id"
                         width={100}

@@ -5,6 +5,7 @@ class Column extends React.Component {
 
     render() {
         const { column, label, dataField, width, sort, onSortChange, onSortSwitch, filters, onFiltersChange, id } = this.props;
+
         return (
             React.cloneElement(column, {
                 width,
@@ -21,7 +22,11 @@ class Column extends React.Component {
                 },
                 dataField,
                 id,
-            }, label === undefined ? (id === undefined ? dataField : id) : label)
+            }, label === undefined ? (
+                id === undefined ? dataField : id
+            ) : (
+                typeof label === 'string' ? label : React.createElement(label, {})
+            ))
         );
     }
 }

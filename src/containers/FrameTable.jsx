@@ -9,7 +9,7 @@ class FrameTable extends React.Component {
 
     render() {
         const {
-            tableComponent, headerComponent, children, bodyComponent, rowComponent,
+            tableComponent, headerComponent, children, bodyComponent, rowComponent, onRowClick,
             sort, onSortChange, externalSort, filters, onFiltersChange, externalFilters,
             cellComponent, onWheel, frameSize, scrollIndex, data, renderSquash, onVisibleDataChange
         } = this.props;
@@ -48,6 +48,7 @@ class FrameTable extends React.Component {
                       filters={filters}
                       externalFilters={externalFilters}
                       onVisibleDataChange={onVisibleDataChange}
+                      onRowClick={onRowClick}
                 />
             </Table>
         );
