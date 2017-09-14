@@ -1,10 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-import App from './App';
+import FrameTable from './containers/Table';
+import RichFrameTable from './components/RichTable';
+import Column from './components/Column';
 
+export default FrameTable;
 
-ReactDOM.render(
-    <App />,
-    document.getElementById('app')
-);
+export {
+    FrameTable,
+    RichFrameTable,
+    Column,
+};

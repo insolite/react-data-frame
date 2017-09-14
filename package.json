@@ -1,4 +1,6 @@
 {
+  "name": "react-frame-table",
+  "version": "0.1.0",
   "private": true,
   "engines": {
     "node": ">=5.0 <6",

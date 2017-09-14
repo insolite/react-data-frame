@@ -4,7 +4,7 @@ import Header from './Header';
 import Body from './Body';
 
 
-class FrameTable extends React.Component {
+class Table extends React.Component {
 
     render() {
         const {
@@ -56,4 +56,4 @@ class FrameTable extends React.Component {
     }
 }
 
-export default FrameTable;
+export default Table;
