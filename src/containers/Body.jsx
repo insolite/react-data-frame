@@ -131,7 +131,7 @@ class Body extends React.Component {
             let index = safeScrollIndex + i;
             rows.push(
                 <Row rowComponent={rowComponent}
-                     key={index}
+                     key={i}
                      index={index}
                      data={data[index]}
                      cellComponent={cellComponent}
