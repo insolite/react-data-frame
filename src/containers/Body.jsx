@@ -119,7 +119,7 @@ class Body extends React.Component {
 
         let safeScrollIndex = Math.max(
             0,
-            Math.min(data.length - 1, scrollIndex)
+            Math.min(data.length - frameSize, scrollIndex)
         );
 
         if (renderSquash) {
