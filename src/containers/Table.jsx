@@ -10,7 +10,8 @@ class Table extends React.Component {
         const {
             tableComponent, headerComponent, children, bodyComponent, rowComponent, onRowClick,
             sort, onSortChange, externalSort, filters, onFiltersChange, externalFilters,
-            cellComponent, onWheel, frameSize, scrollIndex, data, renderSquash, onVisibleDataChange
+            cellComponent, onWheel, frameSize, scrollIndex, data, renderSquash, onVisibleDataChange,
+            onRowContextMenu
         } = this.props;
         let columnIds = [];
         const columnComponents = children.reduce((columns, column) => {
@@ -50,6 +51,7 @@ class Table extends React.Component {
                       externalFilters={externalFilters}
                       onVisibleDataChange={onVisibleDataChange}
                       onRowClick={onRowClick}
+                      onRowContextMenu={onRowContextMenu}
                 />
             ])
         );

@@ -113,7 +113,7 @@ class Body extends React.Component {
     render() {
         const {
             onWheel, frameSize, rowComponent, bodyComponent, cellComponent, columns,
-            scrollIndex, renderSquash, onRowClick
+            scrollIndex, renderSquash, onRowClick, onRowContextMenu
         } = this.props;
         const { data } = this.state;
 
@@ -137,6 +137,7 @@ class Body extends React.Component {
                      cellComponent={cellComponent}
                      columns={columns}
                      onClick={onRowClick}
+                     onContextMenu={onRowContextMenu}
                 />
             );
         }
