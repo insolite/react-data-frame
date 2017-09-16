@@ -26,28 +26,15 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.css$/,
-                use: [
-                    {loader: "style-loader"},
-                    {loader: "css-loader"}
-                ]
-            },
-            {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
-
-                query: {
-                    presets: ['es2015', 'react'],
-                    plugins: ["transform-es2015-destructuring", "transform-object-rest-spread"]
-                }
+                loader: 'babel-loader'
             }
         ]
     },
     resolve: {
         extensions: [
             '.webpack.js',
-            '.web.js',
             '.jsx',
             '.js'
         ],

@@ -2,7 +2,7 @@
 React Frame Table
 =================
 
-Proof of concept for rendering tables with huge amount of rows.
+Table for huge data sets
 
 Setup development environment
 =============================
