@@ -20,11 +20,11 @@ const Column = props => {
         <div className="column"
              style={{width: width || 'auto'}}
         >
-            <div onClick={() => onSortSwitch()}>
+            <div className="column-label" onClick={() => onSortSwitch()}>
                 {SORT_ICONS[sortDirection]}
                 {children}
             </div>
-            <div>
+            <div className="column-filter">
                 {React.createElement(filterComponent || DefaultFilter, {
                     value: filter,
                     onChange: onFilterChange,

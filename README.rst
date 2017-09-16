@@ -4,6 +4,8 @@ React Frame Table
 
 Table for huge data sets
 
+`Demo <https://insolite.github.io/react-frame-table/>`_
+
 Setup development environment
 =============================
 

@@ -5,15 +5,16 @@ const
     LISTEN_HOST = process.env.LISTEN_HOST || 'localhost',
     LISTEN_PORT = process.env.LISTEN_PORT || 3030;
 
-const examplesDir = path.resolve(__dirname, 'examples/rich');
+const exampleSrc = path.resolve(__dirname, 'example');
+const exampleDist = path.resolve(exampleSrc, 'dist');
 
 module.exports = {
     entry: {
         app: './index.jsx'
     },
-    context: examplesDir,
+    context: exampleSrc,
     output: {
-        path: examplesDir,
+        path: exampleDist,
         filename: 'index.js'
     },
     devtool: NODE_ENV == 'development' ? 'inline-source-map' : false,
@@ -21,7 +22,7 @@ module.exports = {
         inline: true,
         host: LISTEN_HOST,
         port: LISTEN_PORT,
-        contentBase: examplesDir
+        contentBase: exampleSrc
     },
     module: {
         loaders: [

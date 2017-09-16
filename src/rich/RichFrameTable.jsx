@@ -90,6 +90,7 @@ class RichFrameTable extends React.Component {
     }
 
     onWheel(e) {
+        e.preventDefault();
         const { scrollbars } = this.refs;
         const { onWheel } = this.props;
         scrollbars.scrollTop(scrollbars.getScrollTop() + e.deltaY);
@@ -215,6 +216,7 @@ class RichFrameTable extends React.Component {
         return React.createElement(this.props.rowComponent, {
             ...props,
             onClick: e => this.onRowClick(data, index, e),
+            style: {height: this.props.rowHeight}
         })
     }
 
@@ -252,15 +254,16 @@ class RichFrameTable extends React.Component {
     }
 
     render() {
-        const height = 281;
         const {
             data, children,
             selectedRows, onSelectedRowsChange,
             sort, onSortChange, externalSort,
             filters, onFiltersChange, externalFilters,
             checkboxComponent,
+            rowHeight, // TODO: refactor
             ...tableProps
         } = this.props;
+        const height = this.props.frameSize * rowHeight;
         const { data: visibleData } = this.state;
         let columnIds = [];
         return (

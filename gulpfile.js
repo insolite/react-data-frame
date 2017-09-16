@@ -4,8 +4,8 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 
 var basePath = {
-    src: 'examples/rich/styles',
-    build: 'examples/rich/resources'
+    src: 'example/styles',
+    build: 'example/resources'
 };
 
 var path = {

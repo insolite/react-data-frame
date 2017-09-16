@@ -1,0 +1,18 @@
+# Setup
+title:        react-frame-table
+tagline:      React table for huge data sets
+baseurl:      ""
+paginate:     1
+github_url:   "https://github.com/insolite/react-frame-table"
+
+# About/contact
+author:
+  name:       Oleg Krasnikov
+  url:        https://github.com/insolite
+
+# Gems
+gems:
+  - jekyll-paginate
+
+#Others
+markdown: kramdown

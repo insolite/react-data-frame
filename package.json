@@ -29,8 +29,8 @@
     "webpack-dev-server": "^2.8.2"
   },
   "scripts": {
-    "clean": "babel-node tools/run clean",
-    "build": "babel-node tools/run build",
+    "build": "webpack && gulp sass && cp -R example/resources example/dist && rm -rf docs/example && cp -R example/dist docs/example",
+    "clean": "rm -rf example/dist",
     "start": "webpack-dev-server"
   }
 }

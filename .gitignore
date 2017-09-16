@@ -41,3 +41,10 @@ jspm_packages
 
 # Built css files
 *.css
+.sass-cache
+
+# examples builds
+dist
+
+# jekyll builds
+_site
