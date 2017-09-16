@@ -61,7 +61,6 @@ class App extends React.Component {
                             columnComponent={Column}
                             selectedRows={this.state.selectedRows}
                             onSelectedRowsChange={this.onSelectedRowsChange}
-                            onRowClick={row => this.setState({selectedRows: [row.id]})}
             >
                 <Column dataField="id"
                         width={100}
