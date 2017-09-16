@@ -46,5 +46,9 @@ jspm_packages
 # examples builds
 dist
 
-# jekyll builds
+# jekyll
 _site
+.bundle
+.sass-cache
+Gemfile.lock
+.DS_Store
