@@ -58,4 +58,10 @@ class Table extends React.Component {
     }
 }
 
+Table.defaultProps = {
+    data: [],
+    filters: {},
+    sort: null,
+};
+
 export default Table;
