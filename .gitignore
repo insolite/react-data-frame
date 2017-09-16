@@ -40,7 +40,7 @@ jspm_packages
 /.idea/
 
 # Built css files
-*.css
+/example/**/*.css
 .sass-cache
 
 # examples builds
