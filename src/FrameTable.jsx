@@ -20,9 +20,6 @@ const FrameTable = (props) => {
                 key: frameIndex,
                 index: rowIndex,
                 data: data[rowIndex],
-                // columns: children,
-                // onClick: onRowClick,
-                // onContextMenu: onContextMenu,
             }, children.map((column, cellIndex) => {
                 return (
                     React.createElement(cellComponent, {
@@ -31,7 +28,6 @@ const FrameTable = (props) => {
                         value: row[column.props.dataField],
                         row,
                         rowIndex,
-                        // width,
                         columnProps: column.props,
                     })
                 );
