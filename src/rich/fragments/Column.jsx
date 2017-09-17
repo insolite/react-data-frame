@@ -17,14 +17,14 @@ const Column = props => {
         filter, onFilterChange, filterComponent
     } = props;
     return (
-        <div className="column"
+        <div className="react-frame-table--column"
              style={{width: width || 'auto'}}
         >
-            <div className="column-label" onClick={() => onSortSwitch()}>
+            <div className="react-frame-table--column-label" onClick={() => onSortSwitch()}>
                 {SORT_ICONS[sortDirection]}
                 {children}
             </div>
-            <div className="column-filter">
+            <div className="react-frame-table--column-filter">
                 {React.createElement(filterComponent || DefaultFilter, {
                     value: filter,
                     onChange: onFilterChange,

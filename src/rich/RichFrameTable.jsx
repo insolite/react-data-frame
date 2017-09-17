@@ -10,6 +10,7 @@ import Table from './fragments/Table';
 import Body from './fragments/Body';
 import Column from './fragments/Column';
 import Checkbox from './Checkbox';
+import DefaultFilter from './DefaultFilter';
 import { SORT_NONE, SORT_ASC, SORT_DSC } from '../constants';
 
 
@@ -59,6 +60,7 @@ class RichFrameTable extends React.Component {
         this.onRowClick = this.onRowClick.bind(this);
         this.invertSelection = this.invertSelection.bind(this);
         this.isSelectedAll = this.isSelectedAll.bind(this);
+        this.renderCheckboxFilter = this.renderCheckboxFilter.bind(this);
         this.renderCheckboxColumn = this.renderCheckboxColumn.bind(this);
         this.renderCheckboxCell = this.renderCheckboxCell.bind(this);
         this.filterData = this.filterData.bind(this);
@@ -216,8 +218,15 @@ class RichFrameTable extends React.Component {
         return React.createElement(this.props.rowComponent, {
             ...props,
             onClick: e => this.onRowClick(data, index, e),
-            style: {height: this.props.rowHeight}
+            style: {height: this.props.rowHeight},
+            selected: this.props.selectedRows.includes(data.id),
         })
+    }
+
+    renderCheckboxFilter(props) {
+        return (
+            React.createElement(DefaultFilter, {...props, style: {...props.style, visibility: 'hidden', width: 1}})
+        );
     }
 
     renderCheckboxColumn(props) {
@@ -267,7 +276,7 @@ class RichFrameTable extends React.Component {
         const { data: visibleData } = this.state;
         let columnIds = [];
         return (
-            <div className="rich-frame-table">
+            <div className="react-frame-table">
                 <FrameTable {...tableProps}
                             data={visibleData}
                             scrollIndex={this.state.scrollIndex}
@@ -277,7 +286,7 @@ class RichFrameTable extends React.Component {
                     {[React.createElement(tableProps.columnComponent, {
                         id: '_selected',
                         label: this.renderCheckboxColumn,
-                        filterComponent: () => <div>&nbsp;</div>,
+                        filterComponent: this.renderCheckboxFilter,
                         filter: () => true, // TODO: filterable flag
                         cellFormatter: this.renderCheckboxCell,
                     }), ...children].map((column, index) => {
@@ -312,7 +321,7 @@ class RichFrameTable extends React.Component {
                     })}
                 </FrameTable>
                 <Scrollbars style={{ width: 10, height: height }}
-                            className="scrollbars"
+                            className="react-frame-table--scrollbars"
                             onScrollFrame={this.onScrollFrame}
                             ref="scrollbars"
                 >

@@ -4,7 +4,7 @@ import React from 'react';
 const Table = props => {
     const { children, ...tableProps } = props;
     return (
-        <div className="table" {...tableProps}>
+        <div className="react-frame-table--table" {...tableProps}>
             {children}
         </div>
     );

@@ -5,7 +5,7 @@ const Cell = props => {
     const { row, rowIndex, value, index, columnProps, columnProps: { dataField, cellValue, cellFormatter, width}, ...cellProps } = props;
     const finalValue = cellValue ? cellValue(value, row, rowIndex) : value;
     return (
-        <div className="cell" style={{width: width || 'auto'}} {...cellProps}>
+        <div className="react-frame-table--cell" style={{width: width || 'auto'}} {...cellProps}>
             {cellFormatter ? (
                 React.createElement(cellFormatter, {
                     index: index,

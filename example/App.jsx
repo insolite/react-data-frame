@@ -4,6 +4,13 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import { Column, RichFrameTable } from 'react-frame-table';
 
 
+const IdCell = props => {
+    return (
+        <div style={{fontStyle: 'italic'}}>{props.value}</div>
+    );
+};
+
+
 class App extends React.Component {
 
     constructor(props) {
@@ -70,14 +77,16 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                {this.rowSets.map((rowSet, index) => {
-                    return (
-                        <a className={`generate-rows ${rowSet.count == this.state.data.length ? 'active' : ''}`}
-                           key={index}
-                           onClick={() => this.setState({data: this.generateRows(rowSet.count)})}
-                        >{rowSet.label}</a>
-                    );
-                })}
+                <div className="options">
+                    {this.rowSets.map((rowSet, index) => {
+                        return (
+                            <a className={`generate-rows ${rowSet.count == this.state.data.length ? 'active' : ''}`}
+                               key={index}
+                               onClick={() => this.setState({data: this.generateRows(rowSet.count)})}
+                            >{rowSet.label}</a>
+                        );
+                    })}
+                </div>
                 <RichFrameTable data={this.state.data}
                                 frameSize={10}
                                 rowHeight={35}
@@ -91,7 +100,7 @@ class App extends React.Component {
                 >
                     <Column dataField="id"
                             width={100}
-                            cellFormatter={props => <div style={{color: 'green'}}>{props.value}</div>}
+                            cellFormatter={IdCell}
                     />
                     <Column dataField="name"
                             width={300}
