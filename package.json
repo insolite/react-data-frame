@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Table for huge data sets",
   "author": "Oleg Krasnikov",
-  "main": "index.jsx",
+  "main": "src/index.jsx",
   "private": true,
   "babel": {
     "presets": [
