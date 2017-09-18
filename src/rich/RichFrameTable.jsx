@@ -1,6 +1,5 @@
 import React from 'react';
 import { isEqual } from 'lodash';
-import { Scrollbars } from 'react-custom-scrollbars';
 
 import FrameTable from '../FrameTable';
 import Row from './fragments/Row';
@@ -11,10 +10,9 @@ import Body from './fragments/Body';
 import Column from './fragments/Column';
 import Checkbox from './Checkbox';
 import DefaultFilter from './DefaultFilter';
+import DefaultScrollbars from './DefaultScrollbars';
 import { SORT_NONE, SORT_ASC, SORT_DSC } from '../constants';
 
-
-const FAKE_SCROLL_CONTAINER_HEIGHT = 10000;
 
 const SORT_DIRECTIONS = [
     SORT_ASC,
@@ -68,6 +66,7 @@ class RichFrameTable extends React.Component {
         this.getData = this.getData.bind(this);
         this.renderBody = this.renderBody.bind(this);
         this.renderRow = this.renderRow.bind(this);
+        this.setScrollbars = this.setScrollbars.bind(this);
 
         this.state = {
             scrollIndex: 0,
@@ -75,6 +74,7 @@ class RichFrameTable extends React.Component {
         };
 
         this.lastSelectedId = null;
+        this.scrollbars = null;
     }
 
     onScrollFrame(values) {
@@ -93,11 +93,9 @@ class RichFrameTable extends React.Component {
 
     onWheel(e) {
         e.preventDefault();
-        const { scrollbars } = this.refs;
-        const { onWheel } = this.props;
-        scrollbars.scrollTop(scrollbars.getScrollTop() + e.deltaY);
-        if (onWheel) {
-            onWheel(e);
+        const scrollbars = this.scrollbars;
+        if (scrollbars) {
+            scrollbars.scrollTop(scrollbars.getScrollTop() + e.deltaY);
         }
     }
 
@@ -262,17 +260,20 @@ class RichFrameTable extends React.Component {
         );
     }
 
+    setScrollbars(scrollbars) {
+        this.scrollbars = scrollbars;
+    }
+
     render() {
         const {
             data, children,
             selectedRows, onSelectedRowsChange,
             sort, onSortChange, externalSort,
             filters, onFiltersChange, externalFilters,
-            checkboxComponent,
+            checkboxComponent, scrollbarsComponent,
             rowHeight, // TODO: refactor
             ...tableProps
         } = this.props;
-        const height = this.props.frameSize * rowHeight;
         const { data: visibleData } = this.state;
         let columnIds = [];
         return (
@@ -320,13 +321,13 @@ class RichFrameTable extends React.Component {
                         );
                     })}
                 </FrameTable>
-                <Scrollbars style={{ width: 10, height: height }}
-                            className="react-frame-table--scrollbars"
-                            onScrollFrame={this.onScrollFrame}
-                            ref="scrollbars"
-                >
-                    <div style={{height: Math.min(this.state.data.length * (height / tableProps.frameSize), FAKE_SCROLL_CONTAINER_HEIGHT)}}>&nbsp;</div>
-                </Scrollbars>
+                {React.createElement(scrollbarsComponent, {
+                    onScrollFrame: this.onScrollFrame,
+                    scrollbarsRef: this.setScrollbars,
+                    frameSize: this.props.frameSize,
+                    rowHeight: rowHeight,
+                    rowsCount: this.state.data.length,
+                })}
             </div>
         );
     }
@@ -340,6 +341,7 @@ RichFrameTable.defaultProps = {
     cellComponent: Cell,
     columnComponent: Column,
     checkboxComponent: Checkbox,
+    scrollbarsComponent: DefaultScrollbars,
     selectedRows: [],
 };
 
