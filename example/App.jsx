@@ -113,6 +113,7 @@ class App extends React.Component {
                               this.onSelectedRowsChange(newSelectedRows);
                           }
                       }}
+                      onClick={e => e.stopPropagation()}
             />
         );
     }
