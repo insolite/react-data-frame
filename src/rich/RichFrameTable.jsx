@@ -8,7 +8,7 @@ import Header from './fragments/Header';
 import Table from './fragments/Table';
 import Body from './fragments/Body';
 import Column from './fragments/Column';
-import Checkbox from './Checkbox';
+import Checkbox from '../../example/Checkbox';
 import DefaultFilter from './DefaultFilter';
 import DefaultScrollbars from './DefaultScrollbars';
 import { SORT_NONE, SORT_ASC, SORT_DSC } from '../constants';
@@ -58,9 +58,6 @@ class RichFrameTable extends React.Component {
         this.onRowClick = this.onRowClick.bind(this);
         this.invertSelection = this.invertSelection.bind(this);
         this.isSelectedAll = this.isSelectedAll.bind(this);
-        this.renderCheckboxFilter = this.renderCheckboxFilter.bind(this);
-        this.renderCheckboxColumn = this.renderCheckboxColumn.bind(this);
-        this.renderCheckboxCell = this.renderCheckboxCell.bind(this);
         this.filterData = this.filterData.bind(this);
         this.sortData = this.sortData.bind(this);
         this.getData = this.getData.bind(this);
@@ -221,45 +218,6 @@ class RichFrameTable extends React.Component {
         })
     }
 
-    renderCheckboxFilter(props) {
-        return (
-            React.createElement(DefaultFilter, {...props, style: {...props.style, visibility: 'hidden', width: 1}})
-        );
-    }
-
-    renderCheckboxColumn(props) {
-        const { checkboxComponent } = this.props;
-        return (
-            React.createElement(checkboxComponent, {
-                checked: this.isSelectedAll(),
-                onChange: () => {
-                    const { data, onSelectedRowsChange } = this.props;
-                    if (this.isSelectedAll()) {
-                        onSelectedRowsChange([]);
-                    } else {
-                        onSelectedRowsChange(data.map(row => row.id));
-                    }
-                },
-            })
-        );
-    }
-
-    renderCheckboxCell(props) {
-        const { selectedRows, checkboxComponent } = this.props;
-        return (
-            React.createElement(checkboxComponent, {
-                checked: selectedRows.includes(props.row.id),
-                onChange: () => {
-                    const { onSelectedRowsChange } = this.props;
-                    const newSelectedRows = this.invertSelection(props.row.id);
-                    if (onSelectedRowsChange) {
-                        onSelectedRowsChange(newSelectedRows);
-                    }
-                }
-            })
-        );
-    }
-
     setScrollbars(scrollbars) {
         this.scrollbars = scrollbars;
     }
@@ -270,7 +228,7 @@ class RichFrameTable extends React.Component {
             selectedRows, onSelectedRowsChange,
             sort, onSortChange, externalSort,
             filters, onFiltersChange, externalFilters,
-            checkboxComponent, scrollbarsComponent,
+            scrollbarsComponent,
             rowHeight, // TODO: refactor
             ...tableProps
         } = this.props;
@@ -284,13 +242,7 @@ class RichFrameTable extends React.Component {
                             bodyComponent={this.renderBody}
                             rowComponent={this.renderRow}
                 >
-                    {[React.createElement(tableProps.columnComponent, {
-                        id: '_selected',
-                        label: this.renderCheckboxColumn,
-                        filterComponent: this.renderCheckboxFilter,
-                        filterFunction: () => true, // TODO: filterable flag
-                        cellFormatter: this.renderCheckboxCell,
-                    }), ...children].map((column, index) => {
+                    {children.map((column, index) => {
                         const { dataField, width, label } = column.props;
                         const id = getColumnId(column);
                         if (columnIds.includes(id)) {
@@ -340,7 +292,6 @@ RichFrameTable.defaultProps = {
     rowComponent: Row,
     cellComponent: Cell,
     columnComponent: Column,
-    checkboxComponent: Checkbox,
     scrollbarsComponent: DefaultScrollbars,
     selectedRows: [],
 };

@@ -9,7 +9,6 @@ import Body from './rich/fragments/Body';
 import Row from './rich/fragments/Row';
 import Cell from './rich/fragments/Cell';
 import DefaultFilter from './rich/DefaultFilter';
-import Checkbox from './rich/Checkbox';
 import DefaultScrollbars from './rich/DefaultScrollbars';
 import { SORT_NONE, SORT_ASC, SORT_DSC } from './constants';
 
@@ -25,7 +24,6 @@ export {
     Row,
     Cell,
     DefaultFilter,
-    Checkbox,
     DefaultScrollbars,
     SORT_NONE,
     SORT_ASC,

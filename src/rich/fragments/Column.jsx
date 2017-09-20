@@ -13,14 +13,14 @@ const SORT_ICONS = {
 const Column = props => {
     const {
         dataField, id, width, children,
-        sortDirection, onSortChange, onSortSwitch,
+        sortDirection, onSortChange, onSortSwitch, sortable,
         filter, onFilterChange, filterComponent
     } = props;
     return (
         <div className="react-frame-table--column"
              style={{width: width || 'auto'}}
         >
-            <div className="react-frame-table--column-label" onClick={() => onSortSwitch()}>
+            <div className="react-frame-table--column-label" onClick={sortable ? () => onSortSwitch() : undefined}>
                 {SORT_ICONS[sortDirection]}
                 {children}
             </div>
@@ -32,6 +32,10 @@ const Column = props => {
             </div>
         </div>
     );
+};
+
+Column.defaultProps = {
+    sortable: true,
 };
 
 export default Column;

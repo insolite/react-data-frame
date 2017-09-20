@@ -3,6 +3,8 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 import { Column, RichFrameTable } from 'react-frame-table';
 
+import Checkbox from './Checkbox';
+
 
 const IdCell = props => {
     return (
@@ -10,6 +12,11 @@ const IdCell = props => {
     );
 };
 
+const CheckboxFilter = props => {
+    return (
+        <div>&nbsp;</div>
+    );
+};
 
 class App extends React.Component {
 
@@ -20,6 +27,8 @@ class App extends React.Component {
         this.onFiltersChange = this.onFiltersChange.bind(this);
         this.onSelectedRowsChange = this.onSelectedRowsChange.bind(this);
         this.generateRows = this.generateRows.bind(this);
+        this.renderCheckboxCell = this.renderCheckboxCell.bind(this);
+        this.renderCheckboxColumnLabel = this.renderCheckboxColumnLabel.bind(this);
 
         this.rowSets = [
             {
@@ -74,6 +83,40 @@ class App extends React.Component {
         });
     }
 
+    renderCheckboxColumnLabel(props) {
+        const { richTable } = this.refs;
+        return (
+            <Checkbox checked={richTable ? richTable.isSelectedAll() : false}
+                      onChange={() => {
+                          const { richTable } = this.refs;
+                          if (richTable) {
+                              const { data } = this.state;
+                              if (richTable.isSelectedAll()) {
+                                  this.onSelectedRowsChange([]);
+                              } else {
+                                  this.onSelectedRowsChange(data.map(row => row.id));
+                              }
+                          }
+                      }}
+            />
+        );
+    }
+
+    renderCheckboxCell(props) {
+        const { selectedRows } = this.state;
+        return (
+            <Checkbox checked={selectedRows.includes(props.row.id)}
+                      onChange={() => {
+                          const { richTable } = this.refs;
+                          if (richTable) {
+                              const newSelectedRows = richTable.invertSelection(props.row.id);
+                              this.onSelectedRowsChange(newSelectedRows);
+                          }
+                      }}
+            />
+        );
+    }
+
     render() {
         return (
             <div>
@@ -97,7 +140,14 @@ class App extends React.Component {
                                 columnComponent={Column}
                                 selectedRows={this.state.selectedRows}
                                 onSelectedRowsChange={this.onSelectedRowsChange}
+                                ref="richTable"
                 >
+                    <Column id="_selected"
+                            label={this.renderCheckboxColumnLabel}
+                            cellFormatter={this.renderCheckboxCell}
+                            filterComponent={CheckboxFilter}
+                            sortable={false}
+                    />
                     <Column dataField="id"
                             width={100}
                             cellFormatter={IdCell}
