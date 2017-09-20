@@ -104,7 +104,7 @@ class App extends React.Component {
                     />
                     <Column dataField="name"
                             width={300}
-                            filter={(filterValue, value) => (value || '').indexOf(filterValue || '') >= 0}
+                            filterFunction={(filterValue, value) => (value || '').indexOf(filterValue || '') >= 0}
                             sortComparer={(value1, value2) => (value1 || '').localeCompare(value2 || '')}
                     />
                     <Column id="num0"
@@ -118,7 +118,7 @@ class App extends React.Component {
                                        style={{width: '100%'}}
                                 />
                             )}
-                            filter={(filterValue, value, row) => value >= filterValue}
+                            filterFunction={(filterValue, value, row) => value >= filterValue}
                     />
                     <Column id="num1"
                             dataField="num"

@@ -159,7 +159,7 @@ class RichFrameTable extends React.Component {
             const filterValue = filters[filterKey];
             const column = columns.find(column => getColumnId(column) === filterKey);
             newData = newData.filter((row) => (
-                (column.props.filter || defaultFilter)(
+                (column.props.filterFunction || defaultFilter)(
                     filterValue,
                     row[column.props.dataField],
                     row,
@@ -288,7 +288,7 @@ class RichFrameTable extends React.Component {
                         id: '_selected',
                         label: this.renderCheckboxColumn,
                         filterComponent: this.renderCheckboxFilter,
-                        filter: () => true, // TODO: filterable flag
+                        filterFunction: () => true, // TODO: filterable flag
                         cellFormatter: this.renderCheckboxCell,
                     }), ...children].map((column, index) => {
                         const { dataField, width, label } = column.props;
