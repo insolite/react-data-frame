@@ -142,6 +142,7 @@ class App extends React.Component {
                                 selectedRows={this.state.selectedRows}
                                 onSelectedRowsChange={this.onSelectedRowsChange}
                                 ref="richTable"
+                                className="react-frame-table"
                 >
                     <Column id="_selected"
                             label={this.renderCheckboxColumnLabel}

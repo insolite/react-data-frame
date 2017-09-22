@@ -224,7 +224,7 @@ class RichFrameTable extends React.Component {
 
     render() {
         const {
-            data, children,
+            data, children, className,
             selectedRows, onSelectedRowsChange,
             sort, onSortChange, externalSort,
             filters, onFiltersChange, externalFilters,
@@ -235,7 +235,7 @@ class RichFrameTable extends React.Component {
         const { data: visibleData } = this.state;
         let columnIds = [];
         return (
-            <div className="react-frame-table">
+            <div className={className}>
                 <FrameTable {...tableProps}
                             data={visibleData}
                             scrollIndex={this.state.scrollIndex}
