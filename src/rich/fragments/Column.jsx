@@ -12,9 +12,9 @@ const SORT_ICONS = {
 
 const Column = props => {
     const {
-        dataField, id, width, children,
+        dataField, id, width, children, visible,
         sortDirection, onSortChange, onSortSwitch, sortable,
-        filter, onFilterChange, filterComponent
+        filter, onFilterChange, filterComponent, filterable,
     } = props;
     return (
         <div className="react-frame-table--column"
@@ -25,10 +25,14 @@ const Column = props => {
                 {children}
             </div>
             <div className="react-frame-table--column-filter">
-                {React.createElement(filterComponent || DefaultFilter, {
-                    value: filter,
-                    onChange: onFilterChange,
-                })}
+                {filterable ? (
+                    React.createElement(filterComponent || DefaultFilter, {
+                        value: filter,
+                        onChange: onFilterChange,
+                    })
+                ) : (
+                    <div className="react-frame-table--no-filter">&nbsp;</div>
+                )}
             </div>
         </div>
     );
@@ -36,6 +40,8 @@ const Column = props => {
 
 Column.defaultProps = {
     sortable: true,
+    visible: true,
+    filterable: true,
 };
 
 export default Column;

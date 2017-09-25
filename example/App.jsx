@@ -12,12 +12,6 @@ const IdCell = props => {
     );
 };
 
-const CheckboxFilter = props => {
-    return (
-        <div>&nbsp;</div>
-    );
-};
-
 class App extends React.Component {
 
     constructor(props) {
@@ -147,7 +141,7 @@ class App extends React.Component {
                     <Column id="_selected"
                             label={this.renderCheckboxColumnLabel}
                             cellFormatter={this.renderCheckboxCell}
-                            filterComponent={CheckboxFilter}
+                            filterable={false}
                             sortable={false}
                     />
                     <Column dataField="id"

@@ -242,7 +242,10 @@ class RichFrameTable extends React.Component {
                             bodyComponent={this.renderBody}
                             rowComponent={this.renderRow}
                 >
-                    {children.map((column, index) => {
+                    {children.filter(column => {
+                        const { visible } = column.props;
+                        return visible === undefined ? true : visible;
+                    }).map((column, index) => {
                         const { dataField, width, label } = column.props;
                         const id = getColumnId(column);
                         if (columnIds.includes(id)) {
