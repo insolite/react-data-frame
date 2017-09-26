@@ -8,8 +8,6 @@ import Header from './fragments/Header';
 import Table from './fragments/Table';
 import Body from './fragments/Body';
 import Column from './fragments/Column';
-import Checkbox from '../../example/Checkbox';
-import DefaultFilter from './DefaultFilter';
 import DefaultScrollbars from './DefaultScrollbars';
 import { SORT_NONE, SORT_ASC, SORT_DSC } from '../constants';
 
