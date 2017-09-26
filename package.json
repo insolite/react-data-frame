@@ -4,7 +4,6 @@
   "description": "Table for huge data sets",
   "author": "Oleg Krasnikov",
   "main": "src/index.jsx",
-  "private": true,
   "babel": {
     "presets": [
       "es2015",
