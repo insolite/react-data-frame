@@ -1,2 +1,12 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# IDEA project files
+/.idea/
+
 docs
 example
+node_modules
+.bumpversion.cfg

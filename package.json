@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "Table for huge data sets",
   "author": "Oleg Krasnikov",
-  "main": "src/index.jsx",
+  "readme": "README.rst",
+  "main": "lib",
   "babel": {
     "presets": [
       "es2015",
@@ -18,6 +19,7 @@
     "react-dom": "^15.6.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
@@ -29,8 +31,10 @@
     "webpack-dev-server": "^2.8.2"
   },
   "scripts": {
-    "build": "webpack && gulp sass && cp -R example/resources example/dist && rm -rf docs/example && cp -R example/dist docs/example",
     "clean": "rm -rf example/dist",
+    "build": "webpack && gulp sass && cp -R example/resources example/dist && rm -rf docs/example && cp -R example/dist docs/example",
+    "lib": "npm run clean && babel src -d lib",
+    "prepublish": "npm run lib",
     "start": "webpack-dev-server"
   }
 }
