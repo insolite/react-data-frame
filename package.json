@@ -1,6 +1,6 @@
 {
   "name": "react-frame-table",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Table for huge data sets",
   "author": "Oleg Krasnikov",
   "readme": "README.rst",
