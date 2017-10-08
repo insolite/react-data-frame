@@ -195,7 +195,7 @@ class RichFrameTable extends React.Component {
             // TODO: optimize: call only sort when possible
             this.setState({
                 data: this.getData(nextProps.data, nextProps.children, nextProps.filters, nextProps.sort),
-            }, () => this.props.onVisibleDataChange && this.props.onVisibleDataChange(this.state.data));
+            }, nextProps.onVisibleDataChange ? () => nextProps.onVisibleDataChange(this.state.data) : undefined);
         }
     }
 
