@@ -65,11 +65,18 @@ class RichFrameTable extends React.Component {
 
         this.state = {
             scrollIndex: 0,
-            data: this.getData(props.data, props.children, props.filters, props.sort),
+            data: props.data,
         };
 
         this.lastSelectedId = null;
         this.scrollbars = null;
+    }
+
+    componentWillMount() {
+        const { data, children, filters, sort } = this.props;
+        this.setState({
+            data: this.getData(data, children, filters, sort),
+        }, this.props.onVisibleDataChange ? () => this.props.onVisibleDataChange(this.state.data) : undefined);
     }
 
     onScrollFrame(values) {
