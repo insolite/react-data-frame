@@ -301,7 +301,13 @@ RichFrameTable.defaultProps = {
     cellComponent: Cell,
     columnComponent: Column,
     scrollbarsComponent: DefaultScrollbars,
+    data: [],
+    filters: {},
+    onFiltersChange: () => undefined,
+    sort: null,
+    onSortChange: () => undefined,
     selectedRows: [],
+    onSelectedRowsChange: () => undefined,
 };
 
 export default RichFrameTable;
