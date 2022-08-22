@@ -32,7 +32,8 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Dependencies
-        run: yarn
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --no-progress --non-interactive
       - name: Build
         run: yarn storybook:build
       - name: Upload artifacts
