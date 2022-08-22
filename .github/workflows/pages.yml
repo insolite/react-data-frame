@@ -1,4 +1,4 @@
-name: 'GitHub Pages Storybook Publish'
+name: 'GitHub Pages Storybook publish'
 on:
   push:
     branches:
@@ -15,7 +15,7 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 jobs:
-  storybook:
+  deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
