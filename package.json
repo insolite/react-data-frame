@@ -5,23 +5,21 @@
   "description": "Table for huge data sets",
   "author": "Oleg Krasnikov",
   "readme": "README.md",
-  "license": "LICENSE",
+  "license": "MIT",
   "workspaces": [
     "packages/*",
     "examples/*"
   ],
   "scripts": {
-    "start": "npm run watch && npm run storybook:start",
-    "build": "lerna run build --scope react-data-frame",
-    "watch": "lerna run watch --scope react-data-frame",
-    "package": "lerna exec --scope react-data-frame -- npm pack",
-    "storybook:start": "lerna run start --scope storybook",
-    "storybook:build": "lerna run build --scope storybook",
-    "prepublish": "lerna run prepublish",
-    "lerna:publish": "lerna publish from-git --yes"
+    "start": "yarn storybook:start",
+    "package:watch": "yarn workspace react-data-frame watch",
+    "package:clean": "yarn workspace react-data-frame clean",
+    "package:build": "yarn workspace react-data-frame build",
+    "package:publish": "yarn workspace react-data-frame publish",
+    "storybook:start": "yarn workspace storybook start",
+    "storybook:build": "yarn workspace storybook build"
   },
   "devDependencies": {
-    "lerna": "^5.4.3",
     "typescript": "^4.7.4"
   }
 }
