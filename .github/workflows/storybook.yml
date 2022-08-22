@@ -10,12 +10,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+      - uses: c-hive/gha-yarn-cache@v2
       - name: Dependencies
         run: yarn
-        uses: ./
       - name: Build
         run: yarn storybook:build
-        uses: ./
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
