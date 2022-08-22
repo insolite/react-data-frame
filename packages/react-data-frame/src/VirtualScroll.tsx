@@ -1,13 +1,15 @@
 import {
   FC,
   ReactNode,
+  UIEventHandler,
   useCallback,
   useState,
+  WheelEventHandler,
 } from 'react';
-import { FrameState } from './useDataFrame';
+import { DataFrameState } from './useDataFrame';
 
 export interface VirtualScrollProps<TRow> {
-  frameState: FrameState<TRow>;
+  frameState: DataFrameState<TRow>;
   children: ReactNode;
 }
 
@@ -25,50 +27,74 @@ const VirtualScroll: FC<VirtualScrollProps<unknown>> = (props) => {
 
   const [rowHeight, setRowHeight] = useState<number>(0);
 
-  const ref = useCallback((element: HTMLDivElement) => {
-    if (element) {
-      setRowHeight(element.offsetHeight / frame.length);
-    } else {
-      setRowHeight(0);
-    }
-  }, [setRowHeight, frame.length]);
+  const dataSize = data.length;
+  const frameSize = frame.length;
+
+  const onFrameRef = useCallback(
+    (element: HTMLDivElement) => {
+      const frameHeight = element?.offsetHeight || 0;
+      setRowHeight(frameHeight / frameSize);
+    },
+    [
+      setRowHeight,
+      frameSize,
+    ],
+  );
+
+  const onScroll = useCallback<UIEventHandler<HTMLDivElement>>(
+    (event) => {
+      const {
+        currentTarget: {
+          scrollTop,
+          offsetHeight: frameHeight,
+          scrollHeight: dataHeight,
+        },
+      } = event;
+      const framePosition = scrollTop / (
+        dataHeight - frameHeight
+      );
+      const newFrame = Math.round(dataSize * framePosition);
+      setFrameIndex(newFrame);
+    },
+    [
+      dataSize,
+      setFrameIndex,
+    ],
+  );
+
+  const onWheel = useCallback<WheelEventHandler<HTMLDivElement>>((event) => {
+    const {
+      currentTarget,
+      deltaY,
+    } = event;
+    currentTarget.scrollBy({
+      top: deltaY,
+    });
+  }, []);
 
   return (
     <div
       style={{
-        maxHeight: `${frame.length * rowHeight}px`,
+        maxHeight: `${frameSize * rowHeight}px`,
         overflowY: 'auto',
       }}
-      onScroll={(event) => {
-        const {
-          currentTarget: {
-            scrollTop,
-            offsetHeight: frameHeight,
-            scrollHeight: dataHeight,
-          },
-        } = event;
-        const framePosition = scrollTop / (dataHeight - frameHeight);
-        const newFrame = Math.round(data.length * framePosition);
-        setFrameIndex(newFrame);
-      }}
-      onWheel={(event) => {
-        event.currentTarget.scrollBy({
-          top: event.deltaY,
-        });
-      }}
+      onScroll={onScroll}
+      onWheel={onWheel}
     >
       <div
-        ref={ref}
-        style={{ position: 'sticky', top: 0 }}
+        ref={onFrameRef}
+        style={{
+          position: 'sticky',
+          top: 0,
+        }}
       >
         {children}
       </div>
       <div
         style={{
-          height: `${data.length * rowHeight}px`,
+          height: `${dataSize * rowHeight}px`,
         }}
-      >
-      </div>
+      />
     </div>
   );
 };
