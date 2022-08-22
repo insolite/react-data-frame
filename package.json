@@ -2,7 +2,6 @@
   "name": "react-data-frame",
   "version": "0.1.1",
   "private": true,
-  "description": "Table for huge data sets",
   "author": "Oleg Krasnikov",
   "readme": "README.md",
   "license": "MIT",
@@ -18,8 +17,5 @@
     "package:publish": "yarn workspace react-data-frame publish",
     "storybook:start": "yarn workspace storybook start",
     "storybook:build": "yarn workspace storybook build"
-  },
-  "devDependencies": {
-    "typescript": "^4.7.4"
   }
 }

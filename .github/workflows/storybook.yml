@@ -1,0 +1,20 @@
+name: 'GitHub Pages Storybook Publish'
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Dependencies
+        run: yarn
+      - name: Build
+        run: yarn storybook:build
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: examples/storybook/storybook-static

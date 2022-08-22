@@ -2,6 +2,7 @@
   "name": "storybook",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://insolite.github.io/react-data-frame",
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
@@ -30,8 +31,8 @@
     "webpack": "^5.74.0"
   },
   "scripts": {
-    "start": "start-storybook -p 6006 -s public",
-    "build": "build-storybook -s public",
+    "start": "start-storybook -p 6006",
+    "build": "build-storybook",
     "upload": "gh-pages -d storybook-static --git \"$(which git)\""
   }
 }
