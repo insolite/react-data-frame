@@ -10,12 +10,15 @@
     "examples/*"
   ],
   "scripts": {
-    "start": "yarn storybook:start",
+    "start": "concurrently \"yarn package:watch\" \"yarn storybook:start\"",
     "package:watch": "yarn workspace react-data-frame watch",
     "package:clean": "yarn workspace react-data-frame clean",
     "package:build": "yarn workspace react-data-frame build",
     "package:publish": "yarn workspace react-data-frame publish",
     "storybook:start": "yarn workspace storybook start",
     "storybook:build": "yarn workspace storybook build"
+  },
+  "devDependencies": {
+    "concurrently": "^7.3.0"
   }
 }
