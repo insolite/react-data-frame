@@ -1,8 +1,8 @@
-import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import cleaner from 'rollup-plugin-cleaner';
 import typescript from 'rollup-plugin-typescript2';
-
-import pkg from './package.json';
+import packageJson from './package.json';
 
 export default {
   input: 'src/index.ts',
@@ -16,8 +16,13 @@ export default {
       format: 'es',
     },
   ],
-  external: [...Object.keys(pkg.peerDependencies || {})],
+  external: [...Object.keys(packageJson.peerDependencies || {})],
   plugins: [
+    cleaner({
+      targets: [
+        './lib/',
+      ],
+    }),
     nodeResolve(),
     commonjs(),
     typescript({
