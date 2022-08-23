@@ -33,6 +33,6 @@
   "scripts": {
     "start": "start-storybook -p 6006",
     "build": "build-storybook",
-    "upload": "gh-pages -d storybook-static --git \"$(which git)\""
+    "upload": "gh-pages -d build --git \"$(which git)\""
   }
 }
