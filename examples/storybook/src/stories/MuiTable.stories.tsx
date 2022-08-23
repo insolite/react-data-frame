@@ -2,7 +2,6 @@ import {
   ComponentMeta,
   ComponentStory,
 } from '@storybook/react';
-import React from 'react';
 import MuiTable from './MuiTable';
 import { BasicStoryArgs } from '../types';
 

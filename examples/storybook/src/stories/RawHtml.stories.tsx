@@ -2,7 +2,6 @@ import {
   ComponentMeta,
   ComponentStory,
 } from '@storybook/react';
-import React from 'react';
 import RawHtml from './RawHtml';
 import { BasicStoryArgs } from '../types';
 
