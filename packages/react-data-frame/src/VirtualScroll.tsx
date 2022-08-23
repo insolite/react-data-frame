@@ -33,7 +33,7 @@ const VirtualScroll: FC<VirtualScrollProps<unknown>> = (props) => {
   const onFrameRef = useCallback(
     (element: HTMLDivElement) => {
       const frameHeight = element?.offsetHeight || 0;
-      setRowHeight(frameHeight / frameSize);
+      setRowHeight(frameSize ? frameHeight / frameSize : 0);
     },
     [
       setRowHeight,
@@ -50,9 +50,8 @@ const VirtualScroll: FC<VirtualScrollProps<unknown>> = (props) => {
           scrollHeight: dataHeight,
         },
       } = event;
-      const framePosition = scrollTop / (
-        dataHeight - frameHeight
-      );
+      const scrollLength = dataHeight - frameHeight;
+      const framePosition = scrollLength ? scrollTop / scrollLength : 0;
       const newFrame = Math.round(dataSize * framePosition);
       setFrameIndex(newFrame);
     },
@@ -77,6 +76,7 @@ const VirtualScroll: FC<VirtualScrollProps<unknown>> = (props) => {
       style={{
         maxHeight: `${frameSize * rowHeight}px`,
         overflowY: 'auto',
+        position: 'relative',
       }}
       onScroll={onScroll}
       onWheel={onWheel}
@@ -92,6 +92,9 @@ const VirtualScroll: FC<VirtualScrollProps<unknown>> = (props) => {
       </div>
       <div
         style={{
+          position: 'absolute',
+          top: 0,
+          width: '100%',
           height: `${dataSize * rowHeight}px`,
         }}
       />
