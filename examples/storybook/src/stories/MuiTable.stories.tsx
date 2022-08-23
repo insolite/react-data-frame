@@ -98,16 +98,3 @@ Simple.parameters = {
     },
   },
 };
-
-export const Large = Template.bind({});
-Large.args = {
-  dataSize: 1500,
-  frameSize: 5,
-};
-Large.parameters = {
-  docs: {
-    source: {
-      code: generateSource(Large.args as BasicStoryArgs),
-    },
-  },
-};

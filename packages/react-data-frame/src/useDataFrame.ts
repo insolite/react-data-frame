@@ -12,6 +12,7 @@ export interface SetFrameIndex {
 export interface DataFrameState<TRow> {
   data: TRow[];
   frame: TRow[];
+  frameIndex: number;
   setFrameIndex: SetFrameIndex;
 }
 
@@ -69,6 +70,7 @@ const useDataFrame = <TRow>(options: DataFrameOptions<TRow>): DataFrameState<TRo
   return {
     data,
     frame,
+    frameIndex,
     setFrameIndex: setFrame,
   };
 };

@@ -7,10 +7,10 @@ import FrameInfo from '../FrameInfo';
 import { BasicStoryArgs } from '../types';
 import useTestData from '../useTestData';
 
-export interface RawHtmlProps extends BasicStoryArgs {
+export interface DataSizeProps extends BasicStoryArgs {
 }
 
-const RawHtml: FC<RawHtmlProps> = (props) => {
+const DataSize: FC<DataSizeProps> = (props) => {
   const {
     dataSize,
     frameSize,
@@ -49,4 +49,4 @@ const RawHtml: FC<RawHtmlProps> = (props) => {
   );
 };
 
-export default RawHtml;
+export default DataSize;

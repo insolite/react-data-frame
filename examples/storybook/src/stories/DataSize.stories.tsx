@@ -2,20 +2,20 @@ import {
   ComponentMeta,
   ComponentStory,
 } from '@storybook/react';
-import RawHtml from './RawHtml';
+import DataSize from './DataSize';
 import { BasicStoryArgs } from '../types';
 
 export default {
-  title: 'Example/Raw HTML',
-  component: RawHtml,
+  title: 'Example/Data Size',
+  component: DataSize,
   argTypes: {
     dataSize: { control: 'number' },
     frameSize: { control: 'number' },
   },
-} as ComponentMeta<typeof RawHtml>;
+} as ComponentMeta<typeof DataSize>;
 
-const Template: ComponentStory<typeof RawHtml> = (args) => (
-  <RawHtml {...args} />
+const Template: ComponentStory<typeof DataSize> = (args) => (
+  <DataSize {...args} />
 );
 
 const generateSource = (args: BasicStoryArgs) => {
@@ -29,12 +29,10 @@ import {
   VirtualScroll,
 } from 'react-data-frame';
 
-export const MyTable = () => {
+export const MyList = () => {
   const data = [
-    {
-      id: 42,
-      title: 'foo',
-    },
+    1,
+    2,
     // ...
   ]; // Your source data of length ${dataSize}
 
@@ -66,15 +64,41 @@ export const MyTable = () => {
 `.trim();
 };
 
-export const Simple = Template.bind({});
-Simple.args = {
+export const Small = Template.bind({});
+Small.args = {
   dataSize: 15,
   frameSize: 5,
 };
-Simple.parameters = {
+Small.parameters = {
   docs: {
     source: {
-      code: generateSource(Simple.args as BasicStoryArgs),
+      code: generateSource(Small.args as BasicStoryArgs),
+    },
+  },
+};
+
+export const Large = Template.bind({});
+Large.args = {
+  dataSize: 1500,
+  frameSize: 10,
+};
+Large.parameters = {
+  docs: {
+    source: {
+      code: generateSource(Large.args as BasicStoryArgs),
+    },
+  },
+};
+
+export const Huge = Template.bind({});
+Huge.args = {
+  dataSize: 15000000,
+  frameSize: 10,
+};
+Huge.parameters = {
+  docs: {
+    source: {
+      code: generateSource(Huge.args as BasicStoryArgs),
     },
   },
 };

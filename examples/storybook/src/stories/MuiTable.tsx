@@ -12,6 +12,7 @@ import {
   useDataFrame,
   VirtualScroll,
 } from 'react-data-frame';
+import FrameInfo from '../FrameInfo';
 import { BasicStoryArgs } from '../types';
 import useTestData from '../useTestData';
 
@@ -37,31 +38,34 @@ const MuiTable: FC<MuiTableProps> = (props) => {
   } = frameState;
 
   return (
-    <VirtualScroll
-      frameState={frameState}
-    >
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell align="right">Title</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {frame.map((row) => (
-              <TableRow
-                key={row.id}
-              >
-                <TableCell>{row.id}</TableCell>
-                <TableCell align="right">{row.title}</TableCell>
+    <>
+      <VirtualScroll
+        frameState={frameState}
+      >
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell align="right">Title</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      {children}
-    </VirtualScroll>
+            </TableHead>
+            <TableBody>
+              {frame.map((row) => (
+                <TableRow
+                  key={row.id}
+                >
+                  <TableCell>{row.id}</TableCell>
+                  <TableCell align="right">{row.title}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        {children}
+      </VirtualScroll>
+      <FrameInfo frameState={frameState}/>
+    </>
   );
 };
 
